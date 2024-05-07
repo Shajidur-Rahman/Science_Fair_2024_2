@@ -83,7 +83,7 @@
 #define EI_CAMERA_FRAME_BYTE_SIZE                 3
 
 // Onboard LED pin
-#define ONBOARD_LED_PIN 4
+#define ONBOARD_LED_PIN 2
 
 /* Private variables ------------------------------------------------------- */
 static bool debug_nn = false; // Set this to true to see e.g. features generated from the raw signal
@@ -135,6 +135,7 @@ void setup()
 {
     // put your setup code here, to run once:
     Serial.begin(115200);
+    pinMode(ONBOARD_LED_PIN, OUTPUT);  // Set the onboard LED pin as output
     //comment out the below line to start inference immediately after upload
     while (!Serial);
     Serial.println("Edge Impulse Inferencing Demo");
@@ -144,9 +145,6 @@ void setup()
     else {
         ei_printf("Camera initialized\r\n");
     }
-
-    // Initialize onboard LED pin
-    pinMode(ONBOARD_LED_PIN, OUTPUT);
 
     ei_printf("\nStarting continious inference in 2 seconds...\n");
     ei_sleep(2000);
