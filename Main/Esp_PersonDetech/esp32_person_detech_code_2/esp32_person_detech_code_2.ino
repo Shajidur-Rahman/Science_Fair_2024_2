@@ -136,6 +136,7 @@ void setup()
     // put your setup code here, to run once:
     Serial.begin(115200);
     pinMode(ONBOARD_LED_PIN, OUTPUT);  // Set the onboard LED pin as output
+    pinMode(4,OUTPUT);
     //comment out the below line to start inference immediately after upload
     while (!Serial);
     Serial.println("Edge Impulse Inferencing Demo");
@@ -208,7 +209,13 @@ void loop()
         if (bb.value == 0) {
             continue;
         }
+
+        // edited
+
         ei_printf("    %s (%f) [ x: %u, y: %u, width: %u, height: %u ]\n", bb.label, bb.value, bb.x, bb.y, bb.width, bb.height);
+        digitalWrite(4,HIGH);
+        delay(100);
+        digitalWrite(4,LOW);
     }
     if (!bb_found) {
         ei_printf("    No objects found\n");
