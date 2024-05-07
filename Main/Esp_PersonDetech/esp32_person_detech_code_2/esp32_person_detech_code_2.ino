@@ -83,7 +83,7 @@
 #define EI_CAMERA_FRAME_BYTE_SIZE                 3
 
 // Onboard LED pin
-#define ONBOARD_LED_PIN 2
+#define ONBOARD_LED_PIN 4
 
 /* Private variables ------------------------------------------------------- */
 static bool debug_nn = false; // Set this to true to see e.g. features generated from the raw signal

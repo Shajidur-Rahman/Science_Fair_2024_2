@@ -38,25 +38,26 @@ if(Serial.available())
 
   //Fan 1
   if(val == '1'){
-    digitalWrite(tf,HIGH);
+    digitalWrite(cf,HIGH);
     Serial.println(val);
     Serial.println("Table Fan ON");
   }
   else if(val == '2'){
-    digitalWrite(tf,LOW);
+    digitalWrite(cf,LOW);
     Serial.println(val);
     Serial.println("Table Fan OFF");
   }
 
   //Fan 2
   else if(val == '3'){
-    myservo.write(55);              // tell servo to go to position in variable 'pos'
+    digitalWrite(tf,HIGH);
+    myservo.write(100);              // tell servo to go to position in variable 'pos'
     delay(15);
     Serial.println(val);
     Serial.println("Celling Fan ON");
   }
   else if(val == '4'){
-    digitalWrite(cf,LOW);
+    digitalWrite(tf,LOW);
     Serial.println(val);
     Serial.println("Celling Fan OFF");
   }

@@ -108,13 +108,13 @@ void loop() {
 //  else{
 //    digitalWrite(gdl,HIGH);  
 //    }
-delay(1000);
+delay(100);
 
-if (sensorValue > 2010){
-  bot.sendMessage(CHAT_ID, "Gas detected", "");
+if (sensorValue > 2750){
+  bot.sendMessage(CHAT_ID, "Gas leakagehas been detected!! ", "");
   }
 if (rainValue < 3000){
-  bot.sendMessage(CHAT_ID, "Rain detected", "");
+  bot.sendMessage(CHAT_ID, "Raining, raining!!", "");
   }
 
 
