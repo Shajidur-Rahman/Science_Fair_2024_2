@@ -110,7 +110,7 @@ void loop() {
 //    }
 delay(100);
 
-if (sensorValue > 2750){
+if (sensorValue > 2850){
   bot.sendMessage(CHAT_ID, "Gas leakagehas been detected!! ", "");
   }
 if (rainValue < 3000){
