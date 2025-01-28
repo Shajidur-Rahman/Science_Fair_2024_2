@@ -97,7 +97,7 @@ void loop() {
  int someValue = analogRead(some_sensor);
   Serial.println(sensorValue);
 //  Serial.print("rin :");
-//  Serial.println(sensorValue);
+ Serial.println(sensorValue);
 //Serial.println(someValue);
 //  if (sensorValue > 3200)
 //  {
@@ -110,15 +110,15 @@ void loop() {
 //    }
 delay(100);
 
-if (sensorValue > 2850){
+if (sensorValue > 3050){
   bot.sendMessage(CHAT_ID, "Gas leakagehas been detected!! ", "");
   }
 if (rainValue < 3000){
-  bot.sendMessage(CHAT_ID, "Raining, raining!!", "");
+  // bot.sendMessage(CHAT_ID, "Raining, raining!!", "");
   }
 
-  delay(2000);
+//   delay(2000);
   
-bot.sendMessage(CHAT_ID, "Mewo", "");
+// bot.sendMessage(CHAT_ID, "Mewo", "");
 
 }
