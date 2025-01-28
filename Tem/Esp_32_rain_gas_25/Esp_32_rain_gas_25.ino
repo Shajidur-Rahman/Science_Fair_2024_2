@@ -2,56 +2,27 @@
 #include <WiFiClientSecure.h>
 #include <UniversalTelegramBot.h>
 #include <ArduinoJson.h>
+
+// WiFi credentials
 const char* ssid = "A20";
 const char* password = "wfvt8118";
 
-// const char* ssid = "MEZBAH";
-// const char* password = "komoladadur";
-
-#define BOTtoken "7072881281:AAHMfKYnp1y-70XXOK-6HWKh1p4eY7z1RgI"  // your Bot Token (Get from Botfather) 
+// Telegram Bot credentials
+#define BOTtoken "7072881281:AAHMfKYnp1y-70XXOK-6HWKh1p4eY7z1RgI"
 #define CHAT_ID "6381289661"
-WiFiClientSecure client;
-UniversalTelegramBot bot(BOTtoken, client);
 
-
-// main work place 
-
-
-
-// define pins 
-
-//const int buttonPin = 4;
-//const int ledPin =  5; 
-
+// Pins
+const int lightPin = 33;   // Pin for the light (could be a relay or an LED)
 const int gas_sensor = 34;    
-
 const int rain_sensor = 32;
-
 const int some_sensor = 35;
 const int gdl = 2; 
 
-//int analogValue = 0;   
+WiFiClientSecure client;
+UniversalTelegramBot bot(BOTtoken, client);
 
-//int gas_sensor = 4;
-
-
-
-
-
-
-
-// state
-//int buttonState = 0;
-//gas_sensor = 0;
-
-
-
-
-
-
-
-
-
+// Variable to store the last update timestamp
+unsigned long lastTime = 0;
 
 void setup() {
   Serial.begin(115200);
@@ -70,44 +41,15 @@ void setup() {
   Serial.println(WiFi.localIP());
   bot.sendMessage(CHAT_ID, "Bot started up", "");
 
-
-
-
-
-
-
-
-
-
   // pinMode
-  pinMode(gdl,OUTPUT);
-
-digitalWrite(gdl,HIGH);
-
-
-
-
-  
+  pinMode(lightPin, OUTPUT);
+  pinMode(gdl, OUTPUT);
+  digitalWrite(gdl, HIGH);
 }
 
 void loop() {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- // Check for new messages every 1 second
-  if (millis() - lastTime > 500) {
+  // Check for new messages every 1 second
+  if (millis() - lastTime > 1000) {
     lastTime = millis();
 
     // Get the latest updates from the bot
@@ -125,57 +67,35 @@ void loop() {
 
         // Check if the message is "turn off light"
         if (message == "turn") {
-          digitalWrite(lightPin, LOW);  // Turn off the light
-          Serial.print("Alodmahmud")
+          digitalWrite(lightPin, HIGH);  // Turn off the light
+          Serial.print("alodmahmud");
           bot.sendMessage(CHAT_ID, "The light has been turned off.", "");
         }
 
+        // You can add more commands here if you like
 
+      }
 
+      // Update the last message received ID
+      numNewMessages = bot.getUpdates(bot.last_message_received + 1);
+    }
+  }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- int sensorValue = analogRead(gas_sensor);
- int rainValue = analogRead(rain_sensor);
- int someValue = analogRead(some_sensor);
+  // Read the gas, rain, and other sensor values
+  int sensorValue = analogRead(gas_sensor);
+  int rainValue = analogRead(rain_sensor);
+  int someValue = analogRead(some_sensor);
   Serial.println(sensorValue);
-//  Serial.print("rin :");
- Serial.println(sensorValue);
-//Serial.println(someValue);
-//  if (sensorValue > 3200)
-//  {
-//    digitalWrite(gdl,LOW);
-//    bot.sendMessage(CHAT_ID, "Gas deteched", "");
-//    
-//  } 
-//  else{
-//    digitalWrite(gdl,HIGH);  
-//    }
-delay(100);
 
-if (sensorValue > 3050){
-  bot.sendMessage(CHAT_ID, "Gas leakagehas been detected!! ", "");
-  }
-if (rainValue < 3000){
-  // bot.sendMessage(CHAT_ID, "Raining, raining!!", "");
+  // If gas is detected, send a message to Telegram
+  if (sensorValue > 3050) {
+    bot.sendMessage(CHAT_ID, "Gas leakage has been detected!!", "");
   }
 
-//   delay(2000);
-  
-// bot.sendMessage(CHAT_ID, "Mewo", "");
+  // If rain is detected (based on the threshold value), send a message to Telegram
+  if (rainValue < 3000) {
+    //bot.sendMessage(CHAT_ID, "Raining, raining!!", "");
+  }
 
+  delay(1000);  // Delay to avoid flooding the bot with messages
 }
