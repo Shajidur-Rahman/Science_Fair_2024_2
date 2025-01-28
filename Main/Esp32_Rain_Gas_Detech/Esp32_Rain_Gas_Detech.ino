@@ -8,8 +8,8 @@ const char* password = "wfvt8118";
 // const char* ssid = "MEZBAH";
 // const char* password = "komoladadur";
 
-#define BOTtoken "6870717932:AAHyUa8JqpHgHNcVfF3pEG5rCA6_Og32dzI"  // your Bot Token (Get from Botfather) 
-#define CHAT_ID "5820700004"
+#define BOTtoken "7072881281:AAHMfKYnp1y-70XXOK-6HWKh1p4eY7z1RgI"  // your Bot Token (Get from Botfather) 
+#define CHAT_ID "6381289661"
 WiFiClientSecure client;
 UniversalTelegramBot bot(BOTtoken, client);
 
@@ -117,5 +117,8 @@ if (rainValue < 3000){
   bot.sendMessage(CHAT_ID, "Raining, raining!!", "");
   }
 
+  delay(2000);
+  
+bot.sendMessage(CHAT_ID, "Mewo", "");
 
 }
