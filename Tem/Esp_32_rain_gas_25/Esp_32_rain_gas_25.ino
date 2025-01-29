@@ -106,14 +106,14 @@ void loop() {
   Serial.print("Gas Value: ");
   Serial.println(gasValue);
 
-  Serial.print("Rain Value: ");
-  Serial.println(rainValue);
+  // Serial.print("Rain Value: ");
+  // Serial.println(rainValue);
 
-  Serial.print("Some Sensor Value: ");
-  Serial.println(someValue);
+  // Serial.print("Some Sensor Value: ");
+  // Serial.println(someValue);
 
   // If gas is detected, send a message to Telegram
-  if (gasValue > 3050) {
+  if (gasValue > 3250) {
     bot.sendMessage(CHAT_ID, "Gas leakage detected!", "");
   }
 
@@ -122,5 +122,5 @@ void loop() {
     bot.sendMessage(CHAT_ID, "Raining detected!", "");
   }
 
-  delay(2000);  // Avoid spamming messages and allow time for sensor reading
+    // Avoid spamming messages and allow time for sensor reading
 }
